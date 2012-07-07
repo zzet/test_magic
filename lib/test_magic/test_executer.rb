@@ -1,6 +1,13 @@
 module TestMagic
   class TestExecuter
 
+    def initialize
+      @quit = false
+      Signal.trap "SIGINT" do
+        @quit = true
+      end
+    end
+
     def execute(options)
       path = options[:path]
 
@@ -9,6 +16,7 @@ module TestMagic
       launcher = TestMagic::TestLauncher.new
 
       test_files.each do |file_path|
+        break if @quit
 
         require file_path
 
@@ -17,6 +25,7 @@ module TestMagic
 
         methods = class_instance.methods.grep /.*_test$/
         methods.each do |method|
+          break if @quit
           launcher.run(class_name.new, method)
         end
 
