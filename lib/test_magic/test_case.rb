@@ -10,6 +10,13 @@ module TestMagic
       end
     end
 
+    class Skipped < StandardError;
+      attr_accessor :message
+      def initialize(msg)
+        @message = msg
+      end
+    end
+
     def initialize
       @assert_count = 0
     end
@@ -33,11 +40,16 @@ module TestMagic
     end
 
     def assert_match(exp, act, msg = nil)
-      msg = "Expected '#{exp}' to match '#{act}'"
+      msg ||= "Expected '#{exp}' to match '#{act}'"
       exp = Regexp.new Regexp.escape exp
       assert exp =~ act, msg
     end
 
+
+    def skip(msg = nil)
+      msg ||= "Test skipped."
+      test_skipped(msg)
+    end
 
     def name
       self.class.name
@@ -50,6 +62,10 @@ module TestMagic
 
       def test_assert_failed(msg)
         raise Assertion.new(msg)
+      end
+
+      def test_skipped(msg)
+        raise Skipped.new(msg)
       end
 
   end

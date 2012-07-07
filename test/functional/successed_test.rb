@@ -1,5 +1,9 @@
 class SuccessedTest < TestMagic::TestCase
 
+  def setup
+    @a = 5
+  end
+
   def true_test
     assert true
   end
@@ -15,4 +19,10 @@ class SuccessedTest < TestMagic::TestCase
   def match_test
     assert_match "_test_", "abra kadabra_test_"
   end
+
+  def assert_setup_test
+    assert_equal @a, 5
+  end
+
+
 end

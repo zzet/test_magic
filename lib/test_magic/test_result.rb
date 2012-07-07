@@ -34,6 +34,15 @@ module TestMagic
       }
     end
 
+    def add_skipped_result(inst, method, err)
+      print " S".blue
+      stat[inst.name] << {
+        :inst => inst,
+        :test => method,
+        :skipped_error => err,
+        :type => "SKIPPED"
+      }
+    end
 
     def stat
       @stat ||= Hash.new {|h,k| h[k]=[]}
@@ -101,6 +110,8 @@ module TestMagic
           print "  " << test[:type].yellow << ": test " << test[:test].to_s.yellow
         when "FAILED"
           print "  " << test[:type].red << ": test " << test[:test].to_s.yellow
+        when "SKIPPED"
+          print "  " << test[:type].blue << ": test " << test[:test].to_s.blue
         else
         end
     end
