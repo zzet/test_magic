@@ -7,8 +7,13 @@ module TestMagic
 
     def run(instance, method)
       instance.setup
+
+      time_start = Time.now.to_f
       instance.send(method)
-      @result.add_success_result(instance, method)
+      time_end = Time.now.to_f
+      time_diff = (time_end - time_start).round(4)
+
+      @result.add_success_result(instance, method, time_diff)
     rescue TestMagic::TestCase::Assertion => e
       @result.add_failed_result(instance, method, e)
     rescue TestMagic::TestCase::Skipped => e
