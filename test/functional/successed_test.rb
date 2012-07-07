@@ -11,4 +11,8 @@ class SuccessedTest < TestMagic::TestCase
   def includes_in_collection_test
     assert_includes ["1", "2", "3"], "1"
   end
+
+  def match_test
+    assert_match "_test_", "abra kadabra_test_"
+  end
 end
