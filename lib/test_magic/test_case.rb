@@ -14,14 +14,22 @@ module TestMagic
       @assert_count = 0
     end
 
-    def assert(value, msg = "Assert failed, except true")
+    def assert(value, msg = nil)
+      msg ||= "Assert failed, except true"
       @assert_count += 1
       test_assert_failed(msg) unless value == true
     end
 
-    def assert_equal(value1, value2)
+    def assert_equal(value1, value2, msg = nil)
+      msg ||= "Assert equal failed, has #{value1}:#{value1.class.name}, except #{value2}:#{value2.class.name}"
       @assert_count += 1
-      assert(value1 == value2, "Assert equal failed, has #{value1}:#{value1.class.name}, except #{value2}:#{value2.class.name}")
+      assert(value1 == value2, msg)
+    end
+
+    def assert_includes(collection, obj, msg = nil)
+      msg ||= "Assert equal failed, has #{value1}:#{value1.class.name}, except #{value2}:#{value2.class.name}"
+      @assert_count += 1
+      assert collection.include?(obj), msg
     end
 
 
