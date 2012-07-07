@@ -29,6 +29,9 @@ module TestMagic
       self.class.name
     end
 
+    def setup; end
+    def teardown; end
+
     private
 
       def test_assert_failed(msg)

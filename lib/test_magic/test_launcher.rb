@@ -6,6 +6,7 @@ module TestMagic
     end
 
     def run(instance, method)
+      instance.setup
       instance.send(method)
       @result.add_success_result(instance, method)
     rescue TestMagic::TestCase::Assertion => e
@@ -13,7 +14,7 @@ module TestMagic
     rescue Exception => e
       @result.add_error_result(instance, method, e)
     ensure
-
+      instance.teardown
     end
 
   end
