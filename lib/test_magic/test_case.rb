@@ -17,7 +17,7 @@ module TestMagic
     def assert(value, msg = nil)
       msg ||= "Assert failed, except true"
       @assert_count += 1
-      test_assert_failed(msg) unless value == true
+      test_assert_failed(msg) unless value
     end
 
     def assert_equal(value1, value2, msg = nil)
@@ -33,7 +33,7 @@ module TestMagic
     end
 
     def assert_match(exp, act, msg = nil)
-      msg = "Expected #{exp} to match #{act}"
+      msg = "Expected '#{exp}' to match '#{act}'"
       exp = Regexp.new Regexp.escape exp
       assert exp =~ act, msg
     end

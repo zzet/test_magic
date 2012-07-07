@@ -11,4 +11,11 @@ class FailedTest < TestMagic::TestCase
     assert_equal 1, "1"
   end
 
+  def match_test
+    assert_match "1", "22222222"
+  end
+  def includes_test
+    assert_includes [1,2,3], 4
+  end
+
 end
