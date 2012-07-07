@@ -1,6 +1,10 @@
+#! /usr/bin/env ruby
+
 require File.expand_path('../../test/test_helper', __FILE__)
 
 test_files = Dir.entries("test")
+
+launcher = TestMagic::TestLauncher.new
 
 test_files.each do |file_name|
    next unless file_name =~ /.*_test\.rb$/
@@ -12,6 +16,9 @@ test_files.each do |file_name|
 
    methods = class_instance.methods.grep /.*_test$/
    methods.each do |method|
-     class_instance.send(method)
+     launcher.run(class_name.new, method)
    end
+
 end
+
+launcher.results
