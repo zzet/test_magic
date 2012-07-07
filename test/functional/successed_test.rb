@@ -5,6 +5,7 @@ class SuccessedTest < TestMagic::TestCase
   end
 
   def true_test
+    sleep 1
     assert true
   end
 

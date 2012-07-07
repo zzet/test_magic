@@ -5,11 +5,12 @@ module TestMagic
       $stdout.sync = true
     end
 
-    def add_success_result(inst, method)
+    def add_success_result(inst, method, time)
       print " .".green
       stat[inst.name] << {
         :inst => inst,
         :test => method,
+        :time => time,
         :type => "PASS"
       }
     end
@@ -105,7 +106,7 @@ module TestMagic
     def output_test_info(test)
       case test[:type]
         when "PASS"
-          print "  " << test[:type].green << ": test " << test[:test].to_s.green
+          print "  " << test[:type].green << ": test " << test[:test].to_s.green << "  (" << test[:time].to_s.green << " ms)"
         when "ERROR"
           print "  " << test[:type].yellow << ": test " << test[:test].to_s.yellow
         when "FAILED"
