@@ -27,9 +27,15 @@ module TestMagic
     end
 
     def assert_includes(collection, obj, msg = nil)
-      msg ||= "Assert equal failed, has #{value1}:#{value1.class.name}, except #{value2}:#{value2.class.name}"
+      msg ||= "Assert includes failed, #{collection} has'n #{obj}"
       @assert_count += 1
       assert collection.include?(obj), msg
+    end
+
+    def assert_match(exp, act, msg = nil)
+      msg = "Expected #{exp} to match #{act}"
+      exp = Regexp.new Regexp.escape exp
+      assert exp =~ act, msg
     end
 
 
