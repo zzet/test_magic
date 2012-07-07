@@ -8,4 +8,7 @@ class SuccessedTest < TestMagic::TestCase
     assert_equal 1, 1
   end
 
+  def includes_in_collection_test
+    assert_includes ["1", "2", "3"], "1"
+  end
 end
