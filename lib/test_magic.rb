@@ -1,5 +1,5 @@
 require "test_magic/version"
 
 module TestMagic
-  # Your code goes here...
+  autoload :TestCase, 'test_magic/test_case'
 end

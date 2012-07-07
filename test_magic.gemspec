@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/testmagic/version', __FILE__)
+require File.expand_path('../lib/test_magic/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Andrey Kumanyaev"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "testmagic"
+  gem.name          = "test_magic"
   gem.require_paths = ["lib"]
-  gem.version       = Testmagic::VERSION
+  gem.version       = TestMagic::VERSION
 end
