@@ -19,6 +19,15 @@ module TestMagic
       }
     end
 
+    def add_failed_result(inst, method, err)
+      stat[inst.name] << {
+        :inst => inst,
+        :test => method,
+        :error => err
+      }
+    end
+
+
     def stat
       @stat ||= Hash.new {|h,k| h[k]=[]}
     end

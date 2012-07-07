@@ -10,6 +10,8 @@ module TestMagic
       @result.add_success_result(instance, method)
     rescue TestMagic::TestCase::Assertion => e
       @result.add_error_result(instance, method, e)
+    rescue Exception => e
+      @result.add_failed_result(instance, method, e)
     ensure
 
     end
