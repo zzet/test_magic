@@ -1,29 +1,18 @@
 module TestMagic
   class TestLauncher
+    attr_accessor :result
     def initialize
-      @statistics = {:success => 0, :errors => 0}
+      @result = TestResult.new
     end
-
-
 
     def run(instance, method)
-      puts "\r\n#---------------------------------------------"
-      puts "# We try run #{instance.name}.#{method}"
-      puts "#---------------------------------------------\r\n"
       instance.send(method)
-      @statistics[:success] += 1
+      @result.add_success_result(instance, method)
     rescue TestMagic::TestCase::Assertion => e
-      @statistics[:errors] += 1
-      puts e.message
-      puts e.backtrace.inspect
+      @result.add_error_result(instance, method, e)
     ensure
-      puts "\r\n#---------------------------------------------"
-      puts "# end"
-      puts "#---------------------------------------------"
+
     end
 
-    def results
-      puts "\r\n\r\n In runned test #{@statistics[:success]} success and #{@statistics[:errors]} errors"
-    end
   end
 end
