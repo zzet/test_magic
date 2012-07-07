@@ -14,14 +14,14 @@ module TestMagic
       @assert_count = 0
     end
 
-    def assert(value)
+    def assert(value, msg = "Assert failed, except true")
       @assert_count += 1
-      test_assert_failed("Assert failed, except true") unless value == true
+      test_assert_failed(msg) unless value == true
     end
 
     def assert_equal(value1, value2)
       @assert_count += 1
-      test_assert_failed("Assert equal failed, has #{value1}:#{value1.class.name}, except #{value2}:#{value2.class.name}") if value1 != value2
+      assert(value1 == value2, "Assert equal failed, has #{value1}:#{value1.class.name}, except #{value2}:#{value2.class.name}")
     end
 
 
