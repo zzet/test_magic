@@ -6,7 +6,7 @@ module TestMagic
     class Assertion < StandardError;
       attr_accessor :message
       def initialize(msg)
-        message = msg
+        @message = msg
       end
     end
 
@@ -21,7 +21,7 @@ module TestMagic
 
     def assert_equal(value1, value2)
       @assert_count += 1
-      test_assert_failed("Assert equal failed, has #{value1}, except #{value2}") if value1 != value2
+      test_assert_failed("Assert equal failed, has #{value1}:#{value1.class.name}, except #{value2}:#{value2.class.name}") if value1 != value2
     end
 
 
